@@ -1,45 +1,39 @@
+function operateOnBiggerValue(value1, value2, operation, template) {
+  const biggerValue = operation(value1, value2) ? value1 : value2;
+  return template(biggerValue);
+}
+
+function multiplyByTwo(value) {
+  return value * 2;
+}
+
+function divideByThree(value) {
+  return value / 3;
+}
+
+function createMessage(value, action) {
+  return `I ${action} ${value} tacos.`;
+}
+
 function multiplyBiggerNumByTwo(num1, num2) {
-  let bigNum;
-  if (num1 > num2) {
-    bigNum = num1;
-    return bigNum * 2;
-  } else {
-    bigNum = num2;
-    return bigNum * 2;
-  }
+  return operateOnBiggerValue(num1, num2, (a, b) => a > b, multiplyByTwo);
 }
 
 function divideBiggerNumByThree(num1, num2) {
-  let bigNum;
-  if (num1 > num2) {
-    bigNum = num1;
-    return bigNum / 3;
-  } else {
-    bigNum = num2;
-    return bigNum / 3;
-  }
+  return operateOnBiggerValue(num1, num2, (a, b) => a > b, divideByThree);
 }
 
 function eatMostTacos(sum1, sum2) {
-  let bigNum;
-  if (sum1 > sum2) {
-    bigNum = sum1;
-    return `I ate ${bigNum} tacos.`;
-  } else {
-    bigNum = sum2;
-    return `I ate ${bigNum} tacos.`;
-  }
+  return operateOnBiggerValue(sum1, sum2, (a, b) => a > b, value => createMessage(value, 'ate'));
 }
 
 function adoptSmallerDog(weight1, weight2) {
-  let smallDog;
-  if (weight1 < weight2) {
-    smallDog = weight1;
-    return `I adopted a dog that weighs ${smallDog} pounds.`;
-  } else {
-    smallDog = weight2;
-    return `I adopted a dog that weighs ${smallDog} pounds.`;
-  }
+  return operateOnBiggerValue(
+    weight1,
+    weight2,
+    (a, b) => a < b,
+    (value) => `I adopted a dog that weighs ${value} pounds.`
+  );
 }
 
 
